@@ -13,7 +13,7 @@ describe('plugin', () => {
   describe('/_monitor/ping', () => {
     it('responds', async () => {
       const server = fastify()
-      server.register(plugin, { name: 'test-app' })
+      server.register(plugin, { app: 'test-app' })
       await server.ready()
 
       const res = await server.inject({ method: 'GET', url: '/_monitor/ping' })
@@ -25,13 +25,13 @@ describe('plugin', () => {
   describe('/_monitor/status', () => {
     it('responds', async () => {
       const server = fastify()
-      server.register(plugin, { name: 'test-app' })
+      server.register(plugin, { app: 'test-app' })
       await server.ready()
 
       const res = await server.inject({ method: 'GET', url: '/_monitor/status' })
       expect(res.statusCode).to.equal(200)
       const parsed = JSON.parse(res.body)
-      expect(parsed.name).to.equal('test-app')
+      expect(parsed.app).to.equal('test-app')
       expect(parsed.pid).to.be.a('number')
       expect(parsed.uptime).to.be.a('number')
       expect(parsed.git).to.be.an('object')
@@ -40,7 +40,7 @@ describe('plugin', () => {
       expect(parsed.mem).to.be.an('object')
     })
 
-    it('omits name when not provided', async () => {
+    it('omits app when not provided', async () => {
       const server = fastify()
       server.register(plugin)
       await server.ready()
@@ -48,7 +48,7 @@ describe('plugin', () => {
       const res = await server.inject({ method: 'GET', url: '/_monitor/status' })
       expect(res.statusCode).to.equal(200)
       const parsed = JSON.parse(res.body)
-      expect(parsed.name).to.equal(undefined)
+      expect(parsed.app).to.equal(undefined)
       expect(parsed.pid).to.be.a('number')
       expect(parsed.uptime).to.be.a('number')
       expect(parsed.git).to.be.an('object')

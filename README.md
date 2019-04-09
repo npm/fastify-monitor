@@ -13,7 +13,7 @@ This plugin accepts the following environment variables to override default beha
 
 The following properties may be passed when registering the plugin:
 
-- `name`: a string used as an identifier for the microservice, will be returned as part of the status payload
+- `app`: a string used as an identifier for the microservice, will be returned as part of the status payload
 
 ### Routes
 
@@ -24,7 +24,7 @@ Returns the string `'pong'`. Does nothing else.
 #### GET `/_monitor/status`
 
 Returns an object containing the following fields:
-- `name`: copied from the options when loading the plugin, will be omitted from response if not defined
+- `app`: copied from the options when loading the plugin, will be omitted from response if not defined
 - `pid`: the running process pid `process.pid`
 - `uptime`: the uptime of the running process `process.uptime()`
 - `mem`: an object representing the memory usage of the running process `process.memoryUsage()`

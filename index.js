@@ -26,7 +26,7 @@ module.exports = async function register (server, options, next) {
         200: {
           type: 'object',
           properties: {
-            name: { type: 'string' },
+            app: { type: 'string' },
             pid: { type: 'number' },
             uptime: { type: 'number' },
             mem: {
@@ -51,7 +51,7 @@ module.exports = async function register (server, options, next) {
     },
     handler: async function statusHandler (request, reply) {
       return {
-        name: options.name,
+        app: options.app,
         pid: process.pid,
         uptime: process.uptime(),
         mem: process.memoryUsage(),
