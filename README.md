@@ -55,15 +55,13 @@ server.register(monitor, {
 
 #### GET `/_monitor/ping`
 
-Performs all configured checks.
+Returns a `200` status code with the string specified by `PING_RESPONSE`, `options.monitor.pingResponse` or the default `'pong'`.
 
-If successful, returns a `200` status code with the string specified by `PING_RESPONSE`, `options.monitor.pingResponse` or the default `'pong'`.
-
-If any check throws or rejects, returns a `500` status code with a JSON response.
+Note that this route does not perform any additional checks, and is mostly useful as a signal that your service is up and responding (i.e. a `livenessProbe` in kubernetes).
 
 #### GET `/_monitor/status`
 
-Performs all configured checks.
+Performs all configured checks. This route is useful as a signal that your app is able to perform expected duties (i.e. a `readinessProbe` in kubernetes). Useful additional checks are things like database connectivity and availability of other requried services.
 
 If successful, returns a `200` status code with an object containing the following fields:
 - `app`: copied from the options when loading the plugin, will be omitted from response if not defined

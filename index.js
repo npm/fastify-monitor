@@ -113,7 +113,6 @@ module.exports = async function register (server, options, next) {
       }
     },
     handler: async function pingHandler (request, reply) {
-      await checkFn()
       return options.monitor.pingResponse
     }
   })
