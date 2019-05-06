@@ -104,6 +104,7 @@ module.exports = async function register (server, options, next) {
   server.route({
     method: 'GET',
     url: '/_monitor/ping',
+    logLevel: 'error',
     schema: {
       response: {
         200: {
@@ -120,6 +121,7 @@ module.exports = async function register (server, options, next) {
   server.route({
     method: 'GET',
     url: '/_monitor/status',
+    logLevel: 'error',
     schema: {
       response: {
         200: {
