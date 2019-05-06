@@ -37,7 +37,7 @@ module.exports = async function register (server, options, next) {
             properties: {
               commit: {
                 type: 'string',
-                default: process.env.BUILD_COMMIT
+                default: process.env.BUILD_COMMIT || process.env.BUILD_HASH
               },
               message: {
                 type: 'string',
