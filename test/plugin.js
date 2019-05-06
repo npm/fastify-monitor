@@ -51,25 +51,6 @@ describe('plugin', () => {
       expect(res.statusCode).to.equal(200)
       expect(res.body).to.equal('hi from options')
     })
-
-    it('returns 500 when any check function fails', async () => {
-      const server = fastify()
-      server.register(plugin, { app: 'test-app', monitor: { checks: [{ name: 'fake', fn: () => { throw new Error('Broken!') }, schema: {} }] } })
-      await server.ready()
-
-      const res = await server.inject({ method: 'GET', url: '/_monitor/ping' })
-      expect(res.statusCode).to.equal(500)
-    })
-
-    it('returns 200 when all check functions pass', async () => {
-      const server = fastify()
-      server.register(plugin, { app: 'test-app', monitor: { checks: [{ name: 'fake', fn: () => 'success', schema: { type: 'string' } }] } })
-      await server.ready()
-
-      const res = await server.inject({ method: 'GET', url: '/_monitor/ping' })
-      expect(res.statusCode).to.equal(200)
-      expect(res.body).to.equal('pong')
-    })
   })
 
   describe('/_monitor/status', () => {
